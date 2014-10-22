@@ -28,6 +28,7 @@ public class LinkedList {
 		return listSize;
 	}
 	
+	/*
 	public boolean IsListEmpty () //possibly unneeded
 	{
 		if (head == null)
@@ -40,6 +41,7 @@ public class LinkedList {
 			return false;
 		}
 	}
+	*/
 	
 	public void AddNode (int newData) //function to insert a new node at the head of the list
 	{
