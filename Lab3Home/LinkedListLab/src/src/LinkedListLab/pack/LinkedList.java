@@ -4,8 +4,6 @@ package src.LinkedListLab.pack;
  * Name: Hayden Lowes
  * Student ID: 200307093
  * Project Name: Lab 3 Doubly Linked List Program
- * 
- * Still to do: "Print list from tail to head" function
  */
 
 import java.util.Scanner;
@@ -15,7 +13,7 @@ public class LinkedList {
 	ListNode head;
 	ListNode tail;
 	
-	protected int listSize;
+	protected int listSize; //variable used to store and update the number of elements in the linked list
 	
 	
 	public LinkedList () //constructor
@@ -30,7 +28,7 @@ public class LinkedList {
 		return listSize;
 	}
 	
-	public boolean IsListEmpty ()
+	public boolean IsListEmpty () //possibly unneeded
 	{
 		if (head == null)
 		{
@@ -43,7 +41,7 @@ public class LinkedList {
 		}
 	}
 	
-	public void AddNode (int newData)
+	public void AddNode (int newData) //function to insert a new node at the head of the list
 	{
 		ListNode temp = new ListNode (newData, null, null);
 		
@@ -57,7 +55,7 @@ public class LinkedList {
 		{
 			head.setPreviousNode(temp);
 			temp.setNextNode(head);
-			head = temp;
+			head = temp; //the new node becomes the head of the list, making the old head come next to it
 		}
 		
 		listSize ++;
@@ -68,7 +66,8 @@ public class LinkedList {
 		
 		if (position == 1)
 		{
-			if (listSize == 1)
+			if (listSize == 1) //if the node at the specified position is the only node in the list,
+							   //clear everything
 			{
 				head = null;
 				tail = null;
@@ -83,7 +82,8 @@ public class LinkedList {
 			}
 		}
 		
-		if (position == listSize)
+		else if (position == listSize) //if the node at the specified position is the last node in the list,
+								  //the node before it becomes the new tail node
 		{
 			tail = tail.getPreviousNode();
 			tail.setNextNode(null);
@@ -91,23 +91,28 @@ public class LinkedList {
 			listSize --;
 		}
 		
-		ListNode iterator = head.getNextNode();
-		
-		for (int i = 2; i <= listSize; i ++) //find a node at a position between the first and last node
+		else
 		{
+		
+			ListNode iterator = head.getNextNode();
 			
-			if (i == position)
+			for (int i = 2; i <= listSize; i ++) //find a node at a position between the first and last node
 			{
-				ListNode previousNode = iterator.getPreviousNode();
-				ListNode nextNode = iterator.getNextNode();
 				
-				previousNode.setNextNode(nextNode);
-				nextNode.setPreviousNode (previousNode);
+				if (i == position)
+				{
+					ListNode previousNode = iterator.getPreviousNode();
+					ListNode nextNode = iterator.getNextNode();
+					
+					previousNode.setNextNode(nextNode);
+					nextNode.setPreviousNode (previousNode);
+					
+					listSize --;
+				}
 				
-				listSize --;
+				iterator = iterator.getNextNode();
 			}
-			
-			iterator = iterator.getNextNode();
+		
 		}
 		
 	}
@@ -137,7 +142,8 @@ public class LinkedList {
 					return retriever;
 				}
 				
-				if (i < listSize)
+				if (i < listSize) //if the iterator isn't looking at the tail node, set the retriever to be
+								  //the following node.
 				{
 					retriever = retriever.getNextNode();
 				}

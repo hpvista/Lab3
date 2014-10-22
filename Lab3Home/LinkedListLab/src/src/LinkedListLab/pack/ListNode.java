@@ -35,12 +35,12 @@ public class ListNode {
 		return next;
 	}
 	
-	public void setPreviousNode (ListNode node)
+	public void setPreviousNode (ListNode node) //sets the value of the node before this node in the list
 	{
 		previous = node;
 	}
 	
-	public void setNextNode (ListNode node)
+	public void setNextNode (ListNode node) //sets the value of the node after this node in the list
 	{
 		next = node;
 	}
