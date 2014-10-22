@@ -48,34 +48,45 @@ public class LinkedList {
 		listSize ++;
 	}
 	
-	public void DeleteNode (int position)
+	public ListNode DeleteNode (int position)
 	{		
+		
+		ListNode temp = new ListNode (0, null, null);
 		
 		if (position == 1)
 		{
 			if (listSize == 1) //if the node at the specified position is the only node in the list,
 							   //clear everything
 			{
+				temp = head;
 				head = null;
 				tail = null;
 				listSize = 0;
+				
+				return temp;
 			}
 			
 			else
 			{
+				temp = head;
 				head = head.getNextNode();
 				head.setPreviousNode(null);
-				listSize --;	
+				listSize --;
+				
+				return temp;
 			}
 		}
 		
 		else if (position == listSize) //if the node at the specified position is the last node in the list,
 								  //the node before it becomes the new tail node
 		{
+			temp = tail;
 			tail = tail.getPreviousNode();
 			tail.setNextNode(null);
 			
 			listSize --;
+			
+			return temp;
 		}
 		
 		else
@@ -88,6 +99,7 @@ public class LinkedList {
 				
 				if (i == position)
 				{
+					temp = iterator;
 					ListNode previousNode = iterator.getPreviousNode();
 					ListNode nextNode = iterator.getNextNode();
 					
@@ -95,10 +107,14 @@ public class LinkedList {
 					nextNode.setPreviousNode (previousNode);
 					
 					listSize --;
+					
+					return temp;
 				}
 				
 				iterator = iterator.getNextNode();
 			}
+			
+			return temp;
 		
 		}
 		
@@ -263,7 +279,8 @@ public class LinkedList {
             	
             	else
             	{
-            		dLinkedList.DeleteNode(position);
+            		ListNode deletedNode = dLinkedList.DeleteNode(position);
+            		System.out.println ("The node containing the value " + deletedNode.getNodeData() + " has been removed from the list.");
             	}
             	break;
             	
