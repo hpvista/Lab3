@@ -119,7 +119,11 @@ public class LinkedList {
 		}
 		
 	}
-	
+	/**
+	 * This Retreives a node.
+	 * @param position
+	 * @return ListNode
+	 */
 	public ListNode RetrieveNode (int position)
 	{
 		ListNode retriever = head;
